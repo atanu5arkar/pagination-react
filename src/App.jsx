@@ -37,7 +37,7 @@ function App() {
     const [pageData, setPageData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const PAGE_LIMIT = 10;
+    const PAGE_LIMIT = 6;
 
     useEffect(() => {
         async function fetchData() {
@@ -46,7 +46,7 @@ function App() {
                 const resBody = await res.json();
 
                 if (!res.ok) throw new Error();
-
+                
                 setItems(resBody.recipes);
                 setIsLoading(false);
 
@@ -71,20 +71,20 @@ function App() {
                 limit={PAGE_LIMIT}
                 setPageData={setPageData}
             />
-            <main className="container">
+            <section className="items-container">
                 {
                     pageData.map((item, i) => {
                         return (
-                            <div className="item-card">
+                            <div className="item-card" key={i}>
                                 <figure className="item-img">
                                     <img src={item.image} alt={item.tags[0]} />
                                 </figure>
-                                {item.name}
+                                <p>{item.name}</p>
                             </div>
                         )
                     })
                 }
-            </main>
+            </section>
         </>
     )
 }
